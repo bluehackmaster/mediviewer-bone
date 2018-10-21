@@ -2,6 +2,7 @@ import JSZIP from 'jszip';
 // import * as THREE from 'three';
 // import Medic3D from '../../../../Medic3D/dist/medic3d'
 // for release
+const fs = require('fs');
 import Medic3D from '../../../static/lib/Medic3D/medic3d'
 import Request from 'request';
 import * as THREE from '../../../static/lib/three.min';
@@ -100,22 +101,22 @@ void main()
 }
 
 // 3d renderer
-const r0 = {
-  domId: 'layout-1-1',
-  domElement: null,
-  renderer: null,
-  color: 0x212121,
-  targetID: 0,
-  camera: null,
-  controls: null,
-  scene: null,
-  light: null,
-  offset: null
-};
+// const r0 = {
+//   domId: 'layout-1-1',
+//   domElement: null,
+//   renderer: null,
+//   color: 0x212121,
+//   targetID: 0,
+//   camera: null,
+//   controls: null,
+//   scene: null,
+//   light: null,
+//   offset: null
+// };
 
 // 2d axial renderer
 const r1 = {
-  domId: 'layout-1-2',
+  domId: 'layout-left',
   domElement: null,
   renderer: null,
   color: 0x121212,
@@ -135,7 +136,7 @@ const r1 = {
 
 // 2d sagittal renderer
 const r2 = {
-  domId: 'layout-2-1',
+  domId: 'layout-right',
   domElement: null,
   renderer: null,
   color: 0x121212,
@@ -154,24 +155,24 @@ const r2 = {
 };
 
 // 2d coronal renderer
-const r3 = {
-  domId: 'layout-2-2',
-  domElement: null,
-  renderer: null,
-  color: 0x121212,
-  sliceOrientation: 'coronal',
-  sliceColor: 0x76FF03,
-  targetID: 3,
-  camera: null,
-  controls: null,
-  scene: null,
-  light: null,
-  stackHelper: null,
-  localizerHelper: null,
-  localizerScene: null,
-  name: 'r3',
-  offset: null
-};
+// const r3 = {
+//   domId: 'layout-2-2',
+//   domElement: null,
+//   renderer: null,
+//   color: 0x121212,
+//   sliceOrientation: 'coronal',
+//   sliceColor: 0x76FF03,
+//   targetID: 3,
+//   camera: null,
+//   controls: null,
+//   scene: null,
+//   light: null,
+//   stackHelper: null,
+//   localizerHelper: null,
+//   localizerScene: null,
+//   name: 'r3',
+//   offset: null
+// };
 
 const segDummy = {
   domId: null,
@@ -229,86 +230,86 @@ const segR11 = {
   texture: null,
   offset: null
 }
-const segR12 = {
-  domId: r1.domId,
-  domElement: null,
-  targetID: 12,
-  gui: null,
-  guiParam : {},
-  spaceLength : {
-    x: 256,
-    y: 256,
-    z: 64
-  },
-  renderer : null,
-  scene : null,
-  camera : null,
-  container : null,
-  shaderMat : null,
-  boxHelper : null,
-  screenContainer : null,
-  style: {
-    position: 'absolute',
-    top: 0,
-    left: 0
-  },
-  texture: null,
-  offset: null
-}
-
-const segR13 = {
-  domId: r1.domId,
-  domElement: null,
-  targetID: 13,
-  gui: null,
-  guiParam : {},
-  spaceLength : {
-    x: 256,
-    y: 256,
-    z: 64
-  },
-  renderer : null,
-  scene : null,
-  camera : null,
-  container : null,
-  shaderMat : null,
-  boxHelper : null,
-  screenContainer : null,
-  style: {
-    position: 'absolute',
-    top: 0,
-    left: 0
-  },
-  texture: null,
-  offset: null
-}
-
-const segR14 = {
-  domId: r1.domId,
-  domElement: null,
-  targetID: 14,
-  gui: null,
-  guiParam : {},
-  spaceLength : {
-    x: 256,
-    y: 256,
-    z: 64
-  },
-  renderer : null,
-  scene : null,
-  camera : null,
-  container : null,
-  shaderMat : null,
-  boxHelper : null,
-  screenContainer : null,
-  style: {
-    position: 'absolute',
-    top: 0,
-    left: 0
-  },
-  texture: null,
-  offset: null
-}
+// const segR12 = {
+//   domId: r1.domId,
+//   domElement: null,
+//   targetID: 12,
+//   gui: null,
+//   guiParam : {},
+//   spaceLength : {
+//     x: 256,
+//     y: 256,
+//     z: 64
+//   },
+//   renderer : null,
+//   scene : null,
+//   camera : null,
+//   container : null,
+//   shaderMat : null,
+//   boxHelper : null,
+//   screenContainer : null,
+//   style: {
+//     position: 'absolute',
+//     top: 0,
+//     left: 0
+//   },
+//   texture: null,
+//   offset: null
+// }
+//
+// const segR13 = {
+//   domId: r1.domId,
+//   domElement: null,
+//   targetID: 13,
+//   gui: null,
+//   guiParam : {},
+//   spaceLength : {
+//     x: 256,
+//     y: 256,
+//     z: 64
+//   },
+//   renderer : null,
+//   scene : null,
+//   camera : null,
+//   container : null,
+//   shaderMat : null,
+//   boxHelper : null,
+//   screenContainer : null,
+//   style: {
+//     position: 'absolute',
+//     top: 0,
+//     left: 0
+//   },
+//   texture: null,
+//   offset: null
+// }
+//
+// const segR14 = {
+//   domId: r1.domId,
+//   domElement: null,
+//   targetID: 14,
+//   gui: null,
+//   guiParam : {},
+//   spaceLength : {
+//     x: 256,
+//     y: 256,
+//     z: 64
+//   },
+//   renderer : null,
+//   scene : null,
+//   camera : null,
+//   container : null,
+//   shaderMat : null,
+//   boxHelper : null,
+//   screenContainer : null,
+//   style: {
+//     position: 'absolute',
+//     top: 0,
+//     left: 0
+//   },
+//   texture: null,
+//   offset: null
+// }
 const segR21 = {
   domId: r2.domId,
   domElement: null,
@@ -335,192 +336,192 @@ const segR21 = {
   texture: null,
   offset: null
 }
-const segR22 = {
-  domId: r2.domId,
-  domElement: null,
-  targetID: 22,
-  gui: null,
-  guiParam : {},
-  spaceLength : {
-    x: 256,
-    y: 256,
-    z: 64
-  },
-  renderer : null,
-  scene : null,
-  camera : null,
-  container : null,
-  shaderMat : null,
-  boxHelper : null,
-  screenContainer : null,
-  style: {
-    position: 'absolute',
-    top: 0,
-    left: 0
-  },
-  texture: null,
-  offset: null
-}
-
-const segR23 = {
-  domId: r2.domId,
-  domElement: null,
-  targetID: 23,
-  gui: null,
-  guiParam : {},
-  spaceLength : {
-    x: 256,
-    y: 256,
-    z: 64
-  },
-  renderer : null,
-  scene : null,
-  camera : null,
-  container : null,
-  shaderMat : null,
-  boxHelper : null,
-  screenContainer : null,
-  style: {
-    position: 'absolute',
-    top: 0,
-    left: 0
-  },
-  texture: null,
-  offset: null
-}
-
-const segR24 = {
-  domId: r2.domId,
-  domElement: null,
-  targetID: 24,
-  gui: null,
-  guiParam : {},
-  spaceLength : {
-    x: 256,
-    y: 256,
-    z: 64
-  },
-  renderer : null,
-  scene : null,
-  camera : null,
-  container : null,
-  shaderMat : null,
-  boxHelper : null,
-  screenContainer : null,
-  style: {
-    position: 'absolute',
-    top: 0,
-    left: 0
-  },
-  texture: null,
-  offset: null
-}
-const segR31 = {
-  domId: r3.domId,
-  domElement: null,
-  targetID: 31,
-  gui: null,
-  guiParam : {},
-  spaceLength : {
-    x: 256,
-    y: 256,
-    z: 64
-  },
-  renderer : null,
-  scene : null,
-  camera : null,
-  container : null,
-  shaderMat : null,
-  boxHelper : null,
-  screenContainer : null,
-  style: {
-    position: 'absolute',
-    top: 0,
-    left: 0
-  },
-  texture: null,
-  offset: null
-}
-const segR32 = {
-  domId: r3.domId,
-  domElement: null,
-  targetID: 32,
-  gui: null,
-  guiParam : {},
-  spaceLength : {
-    x: 256,
-    y: 256,
-    z: 64
-  },
-  renderer : null,
-  scene : null,
-  camera : null,
-  container : null,
-  shaderMat : null,
-  boxHelper : null,
-  screenContainer : null,
-  style: {
-    position: 'absolute',
-    top: 0,
-    left: 0
-  },
-  texture: null,
-  offset: null
-}
-
-const segR33 = {
-  domId: r3.domId,
-  domElement: null,
-  targetID: 33,
-  gui: null,
-  guiParam : {},
-  spaceLength : {
-    x: 256,
-    y: 256,
-    z: 64
-  },
-  renderer : null,
-  scene : null,
-  camera : null,
-  container : null,
-  shaderMat : null,
-  boxHelper : null,
-  screenContainer : null,
-  style: {
-    position: 'absolute',
-    top: 0,
-    left: 0
-  },
-  texture: null,
-  offset: null
-}
-
-const segR34 = {
-  domId: r3.domId,
-  domElement: null,
-  targetID: 34,
-  gui: null,
-  guiParam : {},
-  spaceLength : {
-    x: 256,
-    y: 256,
-    z: 64
-  },
-  renderer : null,
-  scene : null,
-  camera : null,
-  container : null,
-  shaderMat : null,
-  boxHelper : null,
-  screenContainer : null,
-  style: {
-    position: 'absolute',
-    top: 0,
-    left: 0
-  },
-  texture: null,
-  offset: null
-}
+// const segR22 = {
+//   domId: r2.domId,
+//   domElement: null,
+//   targetID: 22,
+//   gui: null,
+//   guiParam : {},
+//   spaceLength : {
+//     x: 256,
+//     y: 256,
+//     z: 64
+//   },
+//   renderer : null,
+//   scene : null,
+//   camera : null,
+//   container : null,
+//   shaderMat : null,
+//   boxHelper : null,
+//   screenContainer : null,
+//   style: {
+//     position: 'absolute',
+//     top: 0,
+//     left: 0
+//   },
+//   texture: null,
+//   offset: null
+// }
+//
+// const segR23 = {
+//   domId: r2.domId,
+//   domElement: null,
+//   targetID: 23,
+//   gui: null,
+//   guiParam : {},
+//   spaceLength : {
+//     x: 256,
+//     y: 256,
+//     z: 64
+//   },
+//   renderer : null,
+//   scene : null,
+//   camera : null,
+//   container : null,
+//   shaderMat : null,
+//   boxHelper : null,
+//   screenContainer : null,
+//   style: {
+//     position: 'absolute',
+//     top: 0,
+//     left: 0
+//   },
+//   texture: null,
+//   offset: null
+// }
+//
+// const segR24 = {
+//   domId: r2.domId,
+//   domElement: null,
+//   targetID: 24,
+//   gui: null,
+//   guiParam : {},
+//   spaceLength : {
+//     x: 256,
+//     y: 256,
+//     z: 64
+//   },
+//   renderer : null,
+//   scene : null,
+//   camera : null,
+//   container : null,
+//   shaderMat : null,
+//   boxHelper : null,
+//   screenContainer : null,
+//   style: {
+//     position: 'absolute',
+//     top: 0,
+//     left: 0
+//   },
+//   texture: null,
+//   offset: null
+// }
+// const segR31 = {
+//   domId: r3.domId,
+//   domElement: null,
+//   targetID: 31,
+//   gui: null,
+//   guiParam : {},
+//   spaceLength : {
+//     x: 256,
+//     y: 256,
+//     z: 64
+//   },
+//   renderer : null,
+//   scene : null,
+//   camera : null,
+//   container : null,
+//   shaderMat : null,
+//   boxHelper : null,
+//   screenContainer : null,
+//   style: {
+//     position: 'absolute',
+//     top: 0,
+//     left: 0
+//   },
+//   texture: null,
+//   offset: null
+// }
+// const segR32 = {
+//   domId: r3.domId,
+//   domElement: null,
+//   targetID: 32,
+//   gui: null,
+//   guiParam : {},
+//   spaceLength : {
+//     x: 256,
+//     y: 256,
+//     z: 64
+//   },
+//   renderer : null,
+//   scene : null,
+//   camera : null,
+//   container : null,
+//   shaderMat : null,
+//   boxHelper : null,
+//   screenContainer : null,
+//   style: {
+//     position: 'absolute',
+//     top: 0,
+//     left: 0
+//   },
+//   texture: null,
+//   offset: null
+// }
+//
+// const segR33 = {
+//   domId: r3.domId,
+//   domElement: null,
+//   targetID: 33,
+//   gui: null,
+//   guiParam : {},
+//   spaceLength : {
+//     x: 256,
+//     y: 256,
+//     z: 64
+//   },
+//   renderer : null,
+//   scene : null,
+//   camera : null,
+//   container : null,
+//   shaderMat : null,
+//   boxHelper : null,
+//   screenContainer : null,
+//   style: {
+//     position: 'absolute',
+//     top: 0,
+//     left: 0
+//   },
+//   texture: null,
+//   offset: null
+// }
+//
+// const segR34 = {
+//   domId: r3.domId,
+//   domElement: null,
+//   targetID: 34,
+//   gui: null,
+//   guiParam : {},
+//   spaceLength : {
+//     x: 256,
+//     y: 256,
+//     z: 64
+//   },
+//   renderer : null,
+//   scene : null,
+//   camera : null,
+//   container : null,
+//   shaderMat : null,
+//   boxHelper : null,
+//   screenContainer : null,
+//   style: {
+//     position: 'absolute',
+//     top: 0,
+//     left: 0
+//   },
+//   texture: null,
+//   offset: null
+// }
 
 let gDicomStack = null;
 function getDicomStack () {
@@ -549,50 +550,50 @@ export function init () {
     // we are ready when both meshes have been loaded
     if (ready) {
       // update each cameras
-      r0.controls.update();
+      // r0.controls.update();
       r1.controls.update();
       r2.controls.update();
-      r3.controls.update();
+      // r3.controls.update();
 
       if (shouldShowSegmentation) {
         segR11.controls.update();
-        segR12.controls.update();
-        segR13.controls.update();
-        segR14.controls.update();
+        // segR12.controls.update();
+        // segR13.controls.update();
+        // segR14.controls.update();
 
         segR21.controls.update();
-        segR22.controls.update();
-        segR23.controls.update();
-        segR24.controls.update();
-
-        segR31.controls.update();
-        segR32.controls.update();
-        segR33.controls.update();
-        segR34.controls.update();
+        // segR22.controls.update();
+        // segR23.controls.update();
+        // segR24.controls.update();
+        //
+        // segR31.controls.update();
+        // segR32.controls.update();
+        // segR33.controls.update();
+        // segR34.controls.update();
       }
 
-      r0.light.position.copy(r0.camera.position);
-      r0.renderer.render(r0.scene, r0.camera);
+      // r0.light.position.copy(r0.camera.position);
+      // r0.renderer.render(r0.scene, r0.camera);
 
       // render for each orthogonal views
       renderDo(r1);
       renderDo(r2);
-      renderDo(r3);
+      // renderDo(r3);
       if (shouldShowSegmentation) {
         renderSeg(segR11);
-        renderSeg(segR12);
-        renderSeg(segR13);
-        renderSeg(segR14);
+        // renderSeg(segR12);
+        // renderSeg(segR13);
+        // renderSeg(segR14);
 
         renderSeg(segR21);
-        renderSeg(segR22);
-        renderSeg(segR23);
-        renderSeg(segR24);
+        // renderSeg(segR22);
+        // renderSeg(segR23);
+        // renderSeg(segR24);
 
-        renderSeg(segR31);
-        renderSeg(segR32);
-        renderSeg(segR33);
-        renderSeg(segR34);
+        // renderSeg(segR31);
+        // renderSeg(segR32);
+        // renderSeg(segR33);
+        // renderSeg(segR34);
       }
 
     }
@@ -624,50 +625,50 @@ export function init () {
 
   if (ready) {
     // console.log('Already setup');
-    clearThree(r0.scene);
+    // clearThree(r0.scene);
     clearThree(r1.scene);
     clearThree(r2.scene);
-    clearThree(r3.scene);
+    // clearThree(r3.scene);
 
     // if (shouldShowSegmentation) {
       clearThree(segR11.scene);
-      clearThree(segR12.scene);
-      clearThree(segR13.scene);
-      clearThree(segR14.scene);
+      // clearThree(segR12.scene);
+      // clearThree(segR13.scene);
+      // clearThree(segR14.scene);
 
       clearThree(segR21.scene);
-      clearThree(segR22.scene);
-      clearThree(segR23.scene);
-      clearThree(segR24.scene);
+      // clearThree(segR22.scene);
+      // clearThree(segR23.scene);
+      // clearThree(segR24.scene);
 
-      clearThree(segR31.scene);
-      clearThree(segR32.scene);
-      clearThree(segR33.scene);
-      clearThree(segR34.scene);
+      // clearThree(segR31.scene);
+      // clearThree(segR32.scene);
+      // clearThree(segR33.scene);
+      // clearThree(segR34.scene);
     // }
   } else {
     // console.log('First time');
   }
-  initRenderer3D(r0);
-  initRenderer2D(r3);
+  // initRenderer3D(r0);
+  // initRenderer2D(r3);
   initRenderer2D(r2);
   initRenderer2D(r1);
 
   // if (shouldShowSegmentation) {
     initSegment(segR11);
-    initSegment(segR12);
-    initSegment(segR13);
-    initSegment(segR14);
+    // initSegment(segR12);
+    // initSegment(segR13);
+    // initSegment(segR14);
 
     initSegment(segR21);
-    initSegment(segR22);
-    initSegment(segR23);
-    initSegment(segR24);
+    // initSegment(segR22);
+    // initSegment(segR23);
+    // initSegment(segR24);
 
-    initSegment(segR31);
-    initSegment(segR32);
-    initSegment(segR33);
-    initSegment(segR34);
+    // initSegment(segR31);
+    // initSegment(segR32);
+    // initSegment(segR33);
+    // initSegment(segR34);
   // }
 
   // initGui();    // TODO : initGui(rendererObj)
@@ -795,7 +796,7 @@ function resetSegmentation() {
   shouldShowSegmentation = false;
 }
 
-export function loadZip (uploadedFile, cb) {
+export function loadSingleDicom(uploadedFile, cb) {
   eventListener = cb;
   return new Promise((resolve, reject) => {
     JSZIP.loadAsync(uploadedFile)
@@ -825,25 +826,25 @@ export function loadZip (uploadedFile, cb) {
             // domIDs are already defined as layout-1-1, layout-1-2, layout-2-1, layout-2-2
             // center 3d camera/control on the stack
             let centerLPS = stack.worldCenter();
-            r0.camera.lookAt(centerLPS.x, centerLPS.y, centerLPS.z);
-            r0.camera.updateProjectionMatrix();
-            r0.controls.target.set(centerLPS.x, centerLPS.y, centerLPS.z);
+            // r0.camera.lookAt(centerLPS.x, centerLPS.y, centerLPS.z);
+            // r0.camera.updateProjectionMatrix();
+            // r0.controls.target.set(centerLPS.x, centerLPS.y, centerLPS.z);
 
             // bouding box
-            r0.scene.add(new Medic3D.Helpers.BoundingBox(stack));
+            // r0.scene.add(new Medic3D.Helpers.BoundingBox(stack));
 
-            combineMpr(r0, r1, stack);
-            combineMpr(r0, r2, stack);
-            combineMpr(r0, r3, stack);
+            // combineMpr(r0, r1, stack);
+            // combineMpr(r0, r2, stack);
+            // combineMpr(r0, r3, stack);
 
 
             initHelpersLocalizerAll(stack);
 
             // add click event
-            r0.domElement.addEventListener('click', onClick);
+            // r0.domElement.addEventListener('click', onClick);
             r1.domElement.addEventListener('click', onClick);
             r2.domElement.addEventListener('click', onClick);
-            r3.domElement.addEventListener('click', onClick);
+            // r3.domElement.addEventListener('click', onClick);
             // segR11.domElement.addEventListener('click', onClick);
             // segR12.domElement.addEventListener('click', onClick);
             // segR13.domElement.addEventListener('click', onClick);
@@ -851,7 +852,7 @@ export function loadZip (uploadedFile, cb) {
             // add scroll event
             r1.controls.addEventListener('OnScroll', onScroll);
             r2.controls.addEventListener('OnScroll', onScroll);
-            r3.controls.addEventListener('OnScroll', onScroll);
+            // r3.controls.addEventListener('OnScroll', onScroll);
             // segR11.controls.addEventListener('OnScroll', onScroll);
             // segR12.controls.addEventListener('OnScroll', onScroll);
             // segR13.controls.addEventListener('OnScroll', onScroll);
@@ -907,8 +908,132 @@ export function loadZip (uploadedFile, cb) {
             r1.camera.invertColumns();
             r2.camera.rotate();
             r2.camera.rotate();
-            r3.camera.rotate();
-            r3.camera.rotate();
+            // r3.camera.rotate();
+            // r3.camera.rotate();
+            resolve(true);
+          })
+      })
+  });
+}
+
+export function loadDicom(filename, type) {
+  return new Promise((resolve, reject) => {
+    //ToDo: Read file as uint8array buffer
+    var buffer = 'xxxxxxxx'
+    resolve(buffer)
+  });
+}
+
+export function loadZip (uploadedFile, cb) {
+  eventListener = cb;
+  return new Promise((resolve, reject) => {
+    loadDicom(uploadedFile, 'uint8array')
+      .then(function (buffer) {
+        // console.log('Extracted zip files is read');
+        let LoadersVolume = Medic3D.Loaders.Volume    // export default { Volume }
+        let loader = new LoadersVolume()
+        loader.loadZip(buffer)  //
+          .then(function () {
+
+            resetSegmentation();
+            // {Array.<ModelsSeries>} Array of series properly merged.
+            let series = loader.data[0].mergeSeries(loader.data)[0] // loader.data = series
+            loader.free()
+            loader = null
+
+            // get first stack from series
+            let stack = series.stack[0]
+            stack.prepare()
+
+            // To decide what type of split window(1*1, 2*2)
+            // Split is set as 1*1 if slice is one
+            // domIDs are already defined as layout-1-1, layout-1-2, layout-2-1, layout-2-2
+            // center 3d camera/control on the stack
+            let centerLPS = stack.worldCenter();
+            // r0.camera.lookAt(centerLPS.x, centerLPS.y, centerLPS.z);
+            // r0.camera.updateProjectionMatrix();
+            // r0.controls.target.set(centerLPS.x, centerLPS.y, centerLPS.z);
+
+            // bouding box
+            // r0.scene.add(new Medic3D.Helpers.BoundingBox(stack));
+
+            // combineMpr(r0, r1, stack);
+            // combineMpr(r0, r2, stack);
+            // combineMpr(r0, r3, stack);
+
+
+            initHelpersLocalizerAll(stack);
+
+            // add click event
+            // r0.domElement.addEventListener('click', onClick);
+            r1.domElement.addEventListener('click', onClick);
+            r2.domElement.addEventListener('click', onClick);
+            // r3.domElement.addEventListener('click', onClick);
+            // segR11.domElement.addEventListener('click', onClick);
+            // segR12.domElement.addEventListener('click', onClick);
+            // segR13.domElement.addEventListener('click', onClick);
+            // segR14.domElement.addEventListener('click', onClick);
+            // add scroll event
+            r1.controls.addEventListener('OnScroll', onScroll);
+            r2.controls.addEventListener('OnScroll', onScroll);
+            // r3.controls.addEventListener('OnScroll', onScroll);
+            // segR11.controls.addEventListener('OnScroll', onScroll);
+            // segR12.controls.addEventListener('OnScroll', onScroll);
+            // segR13.controls.addEventListener('OnScroll', onScroll);
+            // segR14.controls.addEventListener('OnScroll', onScroll);
+            // add others event
+            r1.controls.addEventListener('mousedown', onDown);
+            r1.controls.addEventListener('mousemove', onMove);
+            r1.controls.addEventListener('mouseup', onUp);
+            // segR11.controls.addEventListener('mousedown', onDown);
+            // segR11.controls.addEventListener('mousemove', onMove);
+            // segR11.controls.addEventListener('mouseup', onUp);
+            // segR12.controls.addEventListener('mousedown', onDown);
+            // segR12.controls.addEventListener('mousemove', onMove);
+            // segR12.controls.addEventListener('mouseup', onUp);
+            // segR13.controls.addEventListener('mousedown', onDown);
+            // segR13.controls.addEventListener('mousemove', onMove);
+            // segR13.controls.addEventListener('mouseup', onUp);
+            // segR14.controls.addEventListener('mousedown', onDown);
+            // segR14.controls.addEventListener('mousemove', onMove);
+            // segR14.controls.addEventListener('mouseup', onUp);
+            //
+            // segR21.controls.addEventListener('mousedown', onDown);
+            // segR21.controls.addEventListener('mousemove', onMove);
+            // segR21.controls.addEventListener('mouseup', onUp);
+            // segR22.controls.addEventListener('mousedown', onDown);
+            // segR22.controls.addEventListener('mousemove', onMove);
+            // segR22.controls.addEventListener('mouseup', onUp);
+            // segR23.controls.addEventListener('mousedown', onDown);
+            // segR23.controls.addEventListener('mousemove', onMove);
+            // segR23.controls.addEventListener('mouseup', onUp);
+            // segR24.controls.addEventListener('mousedown', onDown);
+            // segR24.controls.addEventListener('mousemove', onMove);
+            // segR24.controls.addEventListener('mouseup', onUp);
+            //
+            // segR31.controls.addEventListener('mousedown', onDown);
+            // segR31.controls.addEventListener('mousemove', onMove);
+            // segR31.controls.addEventListener('mouseup', onUp);
+            // segR32.controls.addEventListener('mousedown', onDown);
+            // segR32.controls.addEventListener('mousemove', onMove);
+            // segR32.controls.addEventListener('mouseup', onUp);
+            // segR33.controls.addEventListener('mousedown', onDown);
+            // segR33.controls.addEventListener('mousemove', onMove);
+            // segR33.controls.addEventListener('mouseup', onUp);
+            // segR34.controls.addEventListener('mousedown', onDown);
+            // segR34.controls.addEventListener('mousemove', onMove);
+            // segR34.controls.addEventListener('mouseup', onUp);
+
+            window.addEventListener('resize', onWindowResize, false);
+            ready = true;
+            gDicomStack = stack;
+            // r1.camera.rotate();
+            // r1.camera.rotate();
+            r1.camera.invertColumns();
+            r2.camera.rotate();
+            r2.camera.rotate();
+            // r3.camera.rotate();
+            // r3.camera.rotate();
             resolve(true);
           })
       })
@@ -935,7 +1060,7 @@ function initHelpersLocalizerAll (stack) {
 // create new mesh with Localizer shaders
   let plane1 = r1.stackHelper.slice.cartesianEquation();
   let plane2 = r2.stackHelper.slice.cartesianEquation();
-  let plane3 = r3.stackHelper.slice.cartesianEquation();
+  // let plane3 = r3.stackHelper.slice.cartesianEquation();
 
 // localizer red slice
   initHelpersLocalizer(r1, stack, plane1,
@@ -943,10 +1068,10 @@ function initHelpersLocalizerAll (stack) {
       {
         plane: plane2,
         color: new THREE.Color(r2.stackHelper.borderColor)
-      },
-      {
-        plane: plane3,
-        color: new THREE.Color(r3.stackHelper.borderColor)
+      // },
+      // {
+      //   plane: plane3,
+      //   color: new THREE.Color(r3.stackHelper.borderColor)
       }
     ]);
 
@@ -956,25 +1081,25 @@ function initHelpersLocalizerAll (stack) {
       {
         plane: plane1,
         color: new THREE.Color(r1.stackHelper.borderColor)
-      },
-      {
-        plane: plane3,
-        color: new THREE.Color(r3.stackHelper.borderColor)
+      // },
+      // {
+      //   plane: plane3,
+      //   color: new THREE.Color(r3.stackHelper.borderColor)
       }
     ]);
 
 // localizer green slice
-  initHelpersLocalizer(r3, stack, plane3,
-    [
-      {
-        plane: plane1,
-        color: new THREE.Color(r1.stackHelper.borderColor)
-      },
-      {
-        plane: plane2,
-        color: new THREE.Color(r2.stackHelper.borderColor)
-      }
-    ]);
+//   initHelpersLocalizer(r3, stack, plane3,
+//     [
+//       {
+//         plane: plane1,
+//         color: new THREE.Color(r1.stackHelper.borderColor)
+//       },
+//       {
+//         plane: plane2,
+//         color: new THREE.Color(r2.stackHelper.borderColor)
+//       }
+//     ]);
 }
 
 function extractZip (zip, type, sort) {
@@ -1064,11 +1189,11 @@ export function loadSegmentation (uploadedFile) {
 
         removeSceneByName(r1);
         removeSceneByName(r2);
-        removeSceneByName(r3);
+        // removeSceneByName(r3);
 
-        combineMpr(r0, r1, getDicomStack());
-        combineMpr(r0, r2, getDicomStack());
-        combineMpr(r0, r3, getDicomStack());
+        // combineMpr(r0, r1, getDicomStack());
+        // combineMpr(r0, r2, getDicomStack());
+        // combineMpr(r0, r3, getDicomStack());
       }
     });
 }
@@ -1109,14 +1234,15 @@ export function loadSegmentation_org (uploadedFile) {
 
         removeSceneByName(r1);
         removeSceneByName(r2);
-        removeSceneByName(r3);
+        // removeSceneByName(r3);
 
-        combineMpr(r0, r1, getDicomStack());
-        combineMpr(r0, r2, getDicomStack());
-        combineMpr(r0, r3, getDicomStack());
+        // combineMpr(r0, r1, getDicomStack());
+        // combineMpr(r0, r2, getDicomStack());
+        // combineMpr(r0, r3, getDicomStack());
       }
     });
 }
+
 
 export function loadSegmentationLocal (segUrl, fileName) {
   return new Promise((resolve, reject) => {
@@ -1146,17 +1272,17 @@ export function loadSegmentationLocal (segUrl, fileName) {
           console.log(localSegmentFileName)
 
           segR11.texture = data[9];
-          segR12.texture = data[10];
-          segR13.texture = data[11];
-          segR14.texture = data[12];
+          // segR12.texture = data[10];
+          // segR13.texture = data[11];
+          // segR14.texture = data[12];
           segR21.texture = data[13];
-          segR22.texture = data[14];
-          segR23.texture = data[15];
-          segR24.texture = data[16];
-          segR31.texture = data[17];
-          segR32.texture = data[18];
-          segR33.texture = data[19];
-          segR34.texture = data[20];
+          // segR22.texture = data[14];
+          // segR23.texture = data[15];
+          // segR24.texture = data[16];
+          // segR31.texture = data[17];
+          // segR32.texture = data[18];
+          // segR33.texture = data[19];
+          // segR34.texture = data[20];
 
 
           var stack = getDicomStack();
@@ -1164,38 +1290,38 @@ export function loadSegmentationLocal (segUrl, fileName) {
             shouldShowSegmentation = true;
 
             initScreen(segR11, fileName);
-            initScreen(segR12, fileName);
-            initScreen(segR13, fileName);
-            initScreen(segR14, fileName);
+            // initScreen(segR12, fileName);
+            // initScreen(segR13, fileName);
+            // initScreen(segR14, fileName);
 
             initScreen(segR21, fileName);
-            initScreen(segR22, fileName);
-            initScreen(segR23, fileName);
-            initScreen(segR24, fileName);
+            // initScreen(segR22, fileName);
+            // initScreen(segR23, fileName);
+            // initScreen(segR24, fileName);
 
-            initScreen(segR31, fileName);
-            initScreen(segR32, fileName);
-            initScreen(segR33, fileName);
-            initScreen(segR34, fileName);
+            // initScreen(segR31, fileName);
+            // initScreen(segR32, fileName);
+            // initScreen(segR33, fileName);
+            // initScreen(segR34, fileName);
 
-            combineMprSeg(r0, segR11, stack);
-            combineMprSeg(r0, segR12, stack);
-            combineMprSeg(r0, segR13, stack);
-            combineMprSeg(r0, segR14, stack);
-
-            combineMprSeg(r0, segR21, stack);
-            combineMprSeg(r0, segR22, stack);
-            combineMprSeg(r0, segR23, stack);
-            combineMprSeg(r0, segR24, stack);
-
-            combineMprSeg(r0, segR31, stack);
-            combineMprSeg(r0, segR32, stack);
-            combineMprSeg(r0, segR33, stack);
-            combineMprSeg(r0, segR34, stack);
+            // combineMprSeg(r0, segR11, stack);
+            // combineMprSeg(r0, segR12, stack);
+            // combineMprSeg(r0, segR13, stack);
+            // combineMprSeg(r0, segR14, stack);
+            //
+            // combineMprSeg(r0, segR21, stack);
+            // combineMprSeg(r0, segR22, stack);
+            // combineMprSeg(r0, segR23, stack);
+            // combineMprSeg(r0, segR24, stack);
+            //
+            // combineMprSeg(r0, segR31, stack);
+            // combineMprSeg(r0, segR32, stack);
+            // combineMprSeg(r0, segR33, stack);
+            // combineMprSeg(r0, segR34, stack);
 
             initSegRender(r1.domId);
             initSegRender(r2.domId);
-            initSegRender(r3.domId);
+            // initSegRender(r3.domId);
 
             adjustR1Orientation()
 
@@ -1207,15 +1333,15 @@ export function loadSegmentationLocal (segUrl, fileName) {
 }
 
 function removeSceneByName (render) {
-  var selectedObj = r0.scene.getObjectByName(render.name);
-  if (selectedObj === null) {
-    // console.log('Not found Object3D ' + render.name);
-    return;
-  } else {
-    // console.log('Found Object3D ' + render.name);
-  }
-  r0.scene.remove(r0.scene.getObjectByName(render.name));
-  render.scene.remove(render.scene.getObjectByName(render.name));
+  // var selectedObj = r0.scene.getObjectByName(render.name);
+  // if (selectedObj === null) {
+  //   // console.log('Not found Object3D ' + render.name);
+  //   return;
+  // } else {
+  //   // console.log('Found Object3D ' + render.name);
+  // }
+  // r0.scene.remove(r0.scene.getObjectByName(render.name));
+  // render.scene.remove(render.scene.getObjectByName(render.name));
 }
 
 function loadZipPngs_old (zip) {
@@ -1378,16 +1504,16 @@ function initSegRender(id) {
       stackHelper = r2.stackHelper;
       msg.view = 'r2';
       break;
-    case r3.domId:
-      stackHelper = r3.stackHelper;
-      msg.view = 'r3';
-      break;
+    // case r3.domId:
+    //   stackHelper = r3.stackHelper;
+    //   msg.view = 'r3';
+    //   break;
     default:
       return;
 
   }
 
-  stackHelper.index = 128;
+  stackHelper.index = 1;
 
   if (shouldShowSegmentation) {
     var uniforms = null;
@@ -1397,30 +1523,30 @@ function initSegRender(id) {
           uniforms = segR11.shaderMat.uniforms;
           uniforms.indexSliceToDisplay.value = stackHelper.index;
 
-          segR12.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR13.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR14.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-        } else if (64 <= stackHelper.index && stackHelper.index < 64 * 2) {
-          uniforms = segR12.shaderMat.uniforms;
-          uniforms.indexSliceToDisplay.value = stackHelper.index - 64;
-
-          segR11.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR13.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR14.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-        } else if (64 * 2 <= stackHelper.index && stackHelper.index < 64 * 3) {
-          uniforms = segR13.shaderMat.uniforms;
-          uniforms.indexSliceToDisplay.value = stackHelper.index - 64 * 2;
-
-          segR11.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR12.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR14.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-        } else if (64 * 3 <= stackHelper.index && stackHelper.index < 64 * 4) {
-          uniforms = segR14.shaderMat.uniforms;
-          uniforms.indexSliceToDisplay.value = stackHelper.index - 64 * 3;
-
-          segR11.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR12.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR13.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+          // segR12.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+          // segR13.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+          // segR14.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        // } else if (64 <= stackHelper.index && stackHelper.index < 64 * 2) {
+        //   uniforms = segR12.shaderMat.uniforms;
+        //   uniforms.indexSliceToDisplay.value = stackHelper.index - 64;
+        //
+        //   segR11.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        //   segR13.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        //   segR14.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        // } else if (64 * 2 <= stackHelper.index && stackHelper.index < 64 * 3) {
+        //   uniforms = segR13.shaderMat.uniforms;
+        //   uniforms.indexSliceToDisplay.value = stackHelper.index - 64 * 2;
+        //
+        //   segR11.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        //   segR12.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        //   segR14.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        // } else if (64 * 3 <= stackHelper.index && stackHelper.index < 64 * 4) {
+        //   uniforms = segR14.shaderMat.uniforms;
+        //   uniforms.indexSliceToDisplay.value = stackHelper.index - 64 * 3;
+        //
+        //   segR11.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        //   segR12.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        //   segR13.shaderMat.uniforms.indexSliceToDisplay.value = -1;
         }
 
         break;
@@ -1429,63 +1555,63 @@ function initSegRender(id) {
           uniforms = segR21.shaderMat.uniforms;
           uniforms.indexSliceToDisplay.value = stackHelper.index;
 
-          segR22.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR23.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR24.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-        } else if (64 <= stackHelper.index && stackHelper.index < 64 * 2) {
-          uniforms = segR22.shaderMat.uniforms;
-          uniforms.indexSliceToDisplay.value = stackHelper.index - 64;
-
-          segR21.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR23.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR24.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-        } else if (64 * 2 <= stackHelper.index && stackHelper.index < 64 * 3) {
-          uniforms = segR23.shaderMat.uniforms;
-          uniforms.indexSliceToDisplay.value = stackHelper.index - 64 * 2;
-
-          segR21.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR22.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR24.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-        } else if (64 * 3 <= stackHelper.index && stackHelper.index < 64 * 4) {
-          uniforms = segR24.shaderMat.uniforms;
-          uniforms.indexSliceToDisplay.value = stackHelper.index - 64 * 3;
-
-          segR21.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR22.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR23.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+          // segR22.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+          // segR23.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+          // segR24.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        // } else if (64 <= stackHelper.index && stackHelper.index < 64 * 2) {
+        //   uniforms = segR22.shaderMat.uniforms;
+        //   uniforms.indexSliceToDisplay.value = stackHelper.index - 64;
+        //
+        //   segR21.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        //   segR23.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        //   segR24.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        // } else if (64 * 2 <= stackHelper.index && stackHelper.index < 64 * 3) {
+        //   uniforms = segR23.shaderMat.uniforms;
+        //   uniforms.indexSliceToDisplay.value = stackHelper.index - 64 * 2;
+        //
+        //   segR21.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        //   segR22.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        //   segR24.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        // } else if (64 * 3 <= stackHelper.index && stackHelper.index < 64 * 4) {
+        //   uniforms = segR24.shaderMat.uniforms;
+        //   uniforms.indexSliceToDisplay.value = stackHelper.index - 64 * 3;
+        //
+        //   segR21.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        //   segR22.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        //   segR23.shaderMat.uniforms.indexSliceToDisplay.value = -1;
         }
         break;
-      case r3.domId:
-        if (stackHelper.index < 64) {
-          uniforms = segR31.shaderMat.uniforms;
-          uniforms.indexSliceToDisplay.value = stackHelper.index;
-
-          segR32.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR33.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR34.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-        } else if (64 <= stackHelper.index && stackHelper.index < 64 * 2) {
-          uniforms = segR32.shaderMat.uniforms;
-          uniforms.indexSliceToDisplay.value = stackHelper.index - 64;
-
-          segR31.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR33.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR34.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-        } else if (64 * 2 <= stackHelper.index && stackHelper.index < 64 * 3) {
-          uniforms = segR33.shaderMat.uniforms;
-          uniforms.indexSliceToDisplay.value = stackHelper.index - 64 * 2;
-
-          segR31.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR32.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR34.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-        } else if (64 * 3 <= stackHelper.index && stackHelper.index < 64 * 4) {
-          uniforms = segR34.shaderMat.uniforms;
-          uniforms.indexSliceToDisplay.value = stackHelper.index - 64 * 3;
-
-          segR31.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR32.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR33.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-        }
-        break;
+      // case r3.domId:
+      //   if (stackHelper.index < 64) {
+      //     uniforms = segR31.shaderMat.uniforms;
+      //     uniforms.indexSliceToDisplay.value = stackHelper.index;
+      //
+      //     segR32.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+      //     segR33.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+      //     segR34.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+      //   } else if (64 <= stackHelper.index && stackHelper.index < 64 * 2) {
+      //     uniforms = segR32.shaderMat.uniforms;
+      //     uniforms.indexSliceToDisplay.value = stackHelper.index - 64;
+      //
+      //     segR31.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+      //     segR33.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+      //     segR34.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+      //   } else if (64 * 2 <= stackHelper.index && stackHelper.index < 64 * 3) {
+      //     uniforms = segR33.shaderMat.uniforms;
+      //     uniforms.indexSliceToDisplay.value = stackHelper.index - 64 * 2;
+      //
+      //     segR31.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+      //     segR32.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+      //     segR34.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+      //   } else if (64 * 3 <= stackHelper.index && stackHelper.index < 64 * 4) {
+      //     uniforms = segR34.shaderMat.uniforms;
+      //     uniforms.indexSliceToDisplay.value = stackHelper.index - 64 * 3;
+      //
+      //     segR31.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+      //     segR32.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+      //     segR33.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+      //   }
+      //   break;
       default:
         return;
     }
@@ -1515,10 +1641,10 @@ function onScroll (event) {
       stackHelper = r2.stackHelper;
       msg.view = 'r2';
       break;
-    case r3.domId:
-      stackHelper = r3.stackHelper;
-      msg.view = 'r3';
-      break;
+    // case r3.domId:
+    //   stackHelper = r3.stackHelper;
+    //   msg.view = 'r3';
+    //   break;
     // case segR1.domId:
     //   var uniforms = segR1.shaderMat.uniforms;
     //   bok = bok++;
@@ -1585,30 +1711,30 @@ function onScroll (event) {
           uniforms = segR11.shaderMat.uniforms;
           uniforms.indexSliceToDisplay.value = stackHelper.index;
 
-          segR12.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR13.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR14.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-        } else if (64 <= stackHelper.index && stackHelper.index < 64 * 2) {
-          uniforms = segR12.shaderMat.uniforms;
-          uniforms.indexSliceToDisplay.value = stackHelper.index - 64;
-
-          segR11.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR13.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR14.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-        } else if (64 * 2 <= stackHelper.index && stackHelper.index < 64 * 3) {
-          uniforms = segR13.shaderMat.uniforms;
-          uniforms.indexSliceToDisplay.value = stackHelper.index - 64 * 2;
-
-          segR11.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR12.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR14.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-        } else if (64 * 3 <= stackHelper.index && stackHelper.index < 64 * 4) {
-          uniforms = segR14.shaderMat.uniforms;
-          uniforms.indexSliceToDisplay.value = stackHelper.index - 64 * 3;
-
-          segR11.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR12.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR13.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+          // segR12.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+          // segR13.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+          // segR14.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        // } else if (64 <= stackHelper.index && stackHelper.index < 64 * 2) {
+        //   uniforms = segR12.shaderMat.uniforms;
+        //   uniforms.indexSliceToDisplay.value = stackHelper.index - 64;
+        //
+        //   segR11.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        //   segR13.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        //   segR14.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        // } else if (64 * 2 <= stackHelper.index && stackHelper.index < 64 * 3) {
+        //   uniforms = segR13.shaderMat.uniforms;
+        //   uniforms.indexSliceToDisplay.value = stackHelper.index - 64 * 2;
+        //
+        //   segR11.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        //   segR12.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        //   segR14.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        // } else if (64 * 3 <= stackHelper.index && stackHelper.index < 64 * 4) {
+        //   uniforms = segR14.shaderMat.uniforms;
+        //   uniforms.indexSliceToDisplay.value = stackHelper.index - 64 * 3;
+        //
+        //   segR11.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        //   segR12.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        //   segR13.shaderMat.uniforms.indexSliceToDisplay.value = -1;
         }
 
         break;
@@ -1617,63 +1743,63 @@ function onScroll (event) {
           uniforms = segR21.shaderMat.uniforms;
           uniforms.indexSliceToDisplay.value = stackHelper.index;
 
-          segR22.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR23.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR24.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-        } else if (64 <= stackHelper.index && stackHelper.index < 64 * 2) {
-          uniforms = segR22.shaderMat.uniforms;
-          uniforms.indexSliceToDisplay.value = stackHelper.index - 64;
-
-          segR21.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR23.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR24.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-        } else if (64 * 2 <= stackHelper.index && stackHelper.index < 64 * 3) {
-          uniforms = segR23.shaderMat.uniforms;
-          uniforms.indexSliceToDisplay.value = stackHelper.index - 64 * 2;
-
-          segR21.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR22.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR24.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-        } else if (64 * 3 <= stackHelper.index && stackHelper.index < 64 * 4) {
-          uniforms = segR24.shaderMat.uniforms;
-          uniforms.indexSliceToDisplay.value = stackHelper.index - 64 * 3;
-
-          segR21.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR22.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR23.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        //   segR22.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        //   segR23.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        //   segR24.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        // } else if (64 <= stackHelper.index && stackHelper.index < 64 * 2) {
+        //   uniforms = segR22.shaderMat.uniforms;
+        //   uniforms.indexSliceToDisplay.value = stackHelper.index - 64;
+        //
+        //   segR21.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        //   segR23.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        //   segR24.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        // } else if (64 * 2 <= stackHelper.index && stackHelper.index < 64 * 3) {
+        //   uniforms = segR23.shaderMat.uniforms;
+        //   uniforms.indexSliceToDisplay.value = stackHelper.index - 64 * 2;
+        //
+        //   segR21.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        //   segR22.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        //   segR24.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        // } else if (64 * 3 <= stackHelper.index && stackHelper.index < 64 * 4) {
+        //   uniforms = segR24.shaderMat.uniforms;
+        //   uniforms.indexSliceToDisplay.value = stackHelper.index - 64 * 3;
+        //
+        //   segR21.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        //   segR22.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+        //   segR23.shaderMat.uniforms.indexSliceToDisplay.value = -1;
         }
         break;
-      case r3.domId:
-        if (stackHelper.index < 64) {
-          uniforms = segR31.shaderMat.uniforms;
-          uniforms.indexSliceToDisplay.value = stackHelper.index;
-
-          segR32.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR33.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR34.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-        } else if (64 <= stackHelper.index && stackHelper.index < 64 * 2) {
-          uniforms = segR32.shaderMat.uniforms;
-          uniforms.indexSliceToDisplay.value = stackHelper.index - 64;
-
-          segR31.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR33.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR34.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-        } else if (64 * 2 <= stackHelper.index && stackHelper.index < 64 * 3) {
-          uniforms = segR33.shaderMat.uniforms;
-          uniforms.indexSliceToDisplay.value = stackHelper.index - 64 * 2;
-
-          segR31.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR32.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR34.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-        } else if (64 * 3 <= stackHelper.index && stackHelper.index < 64 * 4) {
-          uniforms = segR34.shaderMat.uniforms;
-          uniforms.indexSliceToDisplay.value = stackHelper.index - 64 * 3;
-
-          segR31.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR32.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-          segR33.shaderMat.uniforms.indexSliceToDisplay.value = -1;
-        }
-        break;
+      // case r3.domId:
+      //   if (stackHelper.index < 64) {
+      //     uniforms = segR31.shaderMat.uniforms;
+      //     uniforms.indexSliceToDisplay.value = stackHelper.index;
+      //
+      //     segR32.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+      //     segR33.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+      //     segR34.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+      //   } else if (64 <= stackHelper.index && stackHelper.index < 64 * 2) {
+      //     uniforms = segR32.shaderMat.uniforms;
+      //     uniforms.indexSliceToDisplay.value = stackHelper.index - 64;
+      //
+      //     segR31.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+      //     segR33.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+      //     segR34.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+      //   } else if (64 * 2 <= stackHelper.index && stackHelper.index < 64 * 3) {
+      //     uniforms = segR33.shaderMat.uniforms;
+      //     uniforms.indexSliceToDisplay.value = stackHelper.index - 64 * 2;
+      //
+      //     segR31.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+      //     segR32.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+      //     segR34.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+      //   } else if (64 * 3 <= stackHelper.index && stackHelper.index < 64 * 4) {
+      //     uniforms = segR34.shaderMat.uniforms;
+      //     uniforms.indexSliceToDisplay.value = stackHelper.index - 64 * 3;
+      //
+      //     segR31.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+      //     segR32.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+      //     segR33.shaderMat.uniforms.indexSliceToDisplay.value = -1;
+      //   }
+      //   break;
       default:
         return;
     }
@@ -1729,33 +1855,33 @@ function windowResize2DSeg (rendererObj) {
 
 function onWindowResize () {
   // update 3D
-  r0.camera.aspect = r0.domElement.clientWidth / r0.domElement.clientHeight;
-  r0.camera.updateProjectionMatrix();
-  r0.renderer.setSize(r0.domElement.clientWidth, r0.domElement.clientHeight);
+  // r0.camera.aspect = r0.domElement.clientWidth / r0.domElement.clientHeight;
+  // r0.camera.updateProjectionMatrix();
+  // r0.renderer.setSize(r0.domElement.clientWidth, r0.domElement.clientHeight);
 
   // update 2d
   windowResize2D(r1);
   windowResize2D(r2);
-  windowResize2D(r3);
+  // windowResize2D(r3);
 
   if (shouldShowSegmentation) {
     windowResize2DSeg(segR11);
-    windowResize2DSeg(segR12);
-    windowResize2DSeg(segR13);
-    windowResize2DSeg(segR14);
+    // windowResize2DSeg(segR12);
+    // windowResize2DSeg(segR13);
+    // windowResize2DSeg(segR14);
 
     windowResize2DSeg(segR21);
-    windowResize2DSeg(segR22);
-    windowResize2DSeg(segR23);
-    windowResize2DSeg(segR24);
+    // windowResize2DSeg(segR22);
+    // windowResize2DSeg(segR23);
+    // windowResize2DSeg(segR24);
 
-    windowResize2DSeg(segR31);
-    windowResize2DSeg(segR32);
-    windowResize2DSeg(segR33);
-    windowResize2DSeg(segR34);
+    // windowResize2DSeg(segR31);
+    // windowResize2DSeg(segR32);
+    // windowResize2DSeg(segR33);
+    // windowResize2DSeg(segR34);
   }
 
-  computeOffset(r0);
+  // computeOffset(r0);
 }
 
 function computeOffset (renderObj) {
@@ -1789,15 +1915,15 @@ function onClick (event) {
 }
 
 export function Zoom (id, action) {
-  if (id === r0.domId) {
-    let delta = 3;
-    if (action) {
-      delta = -3;
-    }
-    CameraCtrl3D(delta);
-  } else {
+  // if (id === r0.domId) {
+  //   let delta = 3;
+  //   if (action) {
+  //     delta = -3;
+  //   }
+  //   CameraCtrl3D(delta);
+  // } else {
     CameraCtrl2D(id, action);
-  }
+  // }
 }
 
 /**
@@ -1824,22 +1950,22 @@ function CameraCtrl2D (id, action) {
     switch (id) {
       case r1.domId:
         segCameraCtrl2D(segR11, val)
-        segCameraCtrl2D(segR12, val)
-        segCameraCtrl2D(segR13, val)
-        segCameraCtrl2D(segR14, val)
+        // segCameraCtrl2D(segR12, val)
+        // segCameraCtrl2D(segR13, val)
+        // segCameraCtrl2D(segR14, val)
         break;
       case r2.domId:
         segCameraCtrl2D(segR21, val)
-        segCameraCtrl2D(segR22, val)
-        segCameraCtrl2D(segR23, val)
-        segCameraCtrl2D(segR24, val)
+        // segCameraCtrl2D(segR22, val)
+        // segCameraCtrl2D(segR23, val)
+        // segCameraCtrl2D(segR24, val)
         break;
-      case r3.domId:
-        segCameraCtrl2D(segR31, val)
-        segCameraCtrl2D(segR32, val)
-        segCameraCtrl2D(segR33, val)
-        segCameraCtrl2D(segR34, val)
-        break;
+      // case r3.domId:
+      //   segCameraCtrl2D(segR31, val)
+      //   segCameraCtrl2D(segR32, val)
+      //   segCameraCtrl2D(segR33, val)
+      //   segCameraCtrl2D(segR34, val)
+      //   break;
       default:
       // console.log('unselected or r1 is selected');
     }
@@ -1849,7 +1975,7 @@ function CameraCtrl2D (id, action) {
 
   computeOffset(r1)
   computeOffset(r2)
-  computeOffset(r3)
+  // computeOffset(r3)
 }
 
 function segCameraCtrl2D(render, val) {
@@ -1858,7 +1984,7 @@ function segCameraCtrl2D(render, val) {
 }
 
 function CameraCtrl3D (delta) {
-  r0.controls.zoomCtrl(delta);
+  // r0.controls.zoomCtrl(delta);
 }
 
 export function Fit (id) {
@@ -1872,22 +1998,22 @@ export function Fit (id) {
     switch (id) {
       case r1.domId:
         segFitBox(segR11)
-        segFitBox(segR12)
-        segFitBox(segR13)
-        segFitBox(segR14)
+        // segFitBox(segR12)
+        // segFitBox(segR13)
+        // segFitBox(segR14)
         break;
       case r2.domId:
         segFitBox(segR21)
-        segFitBox(segR22)
-        segFitBox(segR23)
-        segFitBox(segR24)
+        // segFitBox(segR22)
+        // segFitBox(segR23)
+        // segFitBox(segR24)
         break;
-      case r3.domId:
-        segFitBox(segR31)
-        segFitBox(segR32)
-        segFitBox(segR33)
-        segFitBox(segR34)
-        break;
+      // case r3.domId:
+      //   segFitBox(segR31)
+      //   segFitBox(segR32)
+      //   segFitBox(segR33)
+      //   segFitBox(segR34)
+      //   break;
       default:
       // console.log('unselected or r1 is selected');
     }
@@ -1914,9 +2040,9 @@ function getView (id) {
     case r2.domId:
       selected = r2;
       break;
-    case r3.domId:
-      selected = r3;
-      break;
+    // case r3.domId:
+    //   selected = r3;
+    //   break;
     default:
       // console.log('unselected or r1 is selected');
   }
@@ -1934,7 +2060,7 @@ export function Invert () {
     }
     r1.stackHelper.slice.invert = newVal;
     r2.stackHelper.slice.invert = newVal;
-    r3.stackHelper.slice.invert = newVal;
+    // r3.stackHelper.slice.invert = newVal;
   }
 }
 
@@ -1943,24 +2069,24 @@ export function Horizontal (id) {
     case r1.domId:
       r1.camera.invertColumns();
       segR11.camera.invertColumns();
-      segR12.camera.invertColumns();
-      segR13.camera.invertColumns();
-      segR14.camera.invertColumns();
+      // segR12.camera.invertColumns();
+      // segR13.camera.invertColumns();
+      // segR14.camera.invertColumns();
       break;
     case r2.domId:
       r2.camera.invertColumns();
       segR21.camera.invertColumns();
-      segR22.camera.invertColumns();
-      segR23.camera.invertColumns();
-      segR24.camera.invertColumns();
+      // segR22.camera.invertColumns();
+      // segR23.camera.invertColumns();
+      // segR24.camera.invertColumns();
       break;
-    case r3.domId:
-      r3.camera.invertColumns();
-      segR31.camera.invertColumns();
-      segR32.camera.invertColumns();
-      segR33.camera.invertColumns();
-      segR34.camera.invertColumns();
-      break;
+    // case r3.domId:
+    //   r3.camera.invertColumns();
+    //   segR31.camera.invertColumns();
+    //   segR32.camera.invertColumns();
+    //   segR33.camera.invertColumns();
+    //   segR34.camera.invertColumns();
+    //   break;
     default:
   }
 }
@@ -1970,22 +2096,23 @@ export function Vertical (id) {
     case r1.domId:
       r1.camera.invertRows();
       segR11.camera.invertRows();
-      segR12.camera.invertRows();
-      segR13.camera.invertRows();
-      segR14.camera.invertRows();
+      // segR12.camera.invertRows();
+      // segR13.camera.invertRows();
+      // segR14.camera.invertRows();
       break;
     case r2.domId:
       r2.camera.invertRows();
-      segR22.camera.invertRows();
-      segR23.camera.invertRows();
-      segR24.camera.invertRows();
+      segR21.camera.invertRows();
+      // segR22.camera.invertRows();
+      // segR23.camera.invertRows();
+      // segR24.camera.invertRows();
       break;
-    case r3.domId:
-      r3.camera.invertRows();
-      segR32.camera.invertRows();
-      segR33.camera.invertRows();
-      segR34.camera.invertRows();
-      break;
+    // case r3.domId:
+    //   r3.camera.invertRows();
+    //   segR32.camera.invertRows();
+    //   segR33.camera.invertRows();
+    //   segR34.camera.invertRows();
+    //   break;
     default:
   }
 }
@@ -1993,36 +2120,36 @@ export function Vertical (id) {
 function  adjustR1Orientation () {
   // r1.camera.invertRows();
   segR11.camera.invertRows();
-  segR12.camera.invertRows();
-  segR13.camera.invertRows();
-  segR14.camera.invertRows();
+  // segR12.camera.invertRows();
+  // segR13.camera.invertRows();
+  // segR14.camera.invertRows();
 }
 
 export function CameraCtrl (enable) {
   // console.log('#cam ctrl ' + enable)
   r1.controls.viewcontrol = enable;
   r2.controls.viewcontrol = enable;
-  r3.controls.viewcontrol = enable;
+  // r3.controls.viewcontrol = enable;
 
   if (shouldShowSegmentation) {
     segR11.controls.viewcontrol = enable;
-    segR12.controls.viewcontrol = enable;
-    segR13.controls.viewcontrol = enable;
-    segR14.controls.viewcontrol = enable;
+    // segR12.controls.viewcontrol = enable;
+    // segR13.controls.viewcontrol = enable;
+    // segR14.controls.viewcontrol = enable;
     segCameraCtrl(segR11, enable);
-    segCameraCtrl(segR12, enable);
-    segCameraCtrl(segR13, enable);
-    segCameraCtrl(segR14, enable);
+    // segCameraCtrl(segR12, enable);
+    // segCameraCtrl(segR13, enable);
+    // segCameraCtrl(segR14, enable);
 
     segCameraCtrl(segR21, enable);
-    segCameraCtrl(segR22, enable);
-    segCameraCtrl(segR23, enable);
-    segCameraCtrl(segR24, enable);
+    // segCameraCtrl(segR22, enable);
+    // segCameraCtrl(segR23, enable);
+    // segCameraCtrl(segR24, enable);
 
-    segCameraCtrl(segR31, enable);
-    segCameraCtrl(segR32, enable);
-    segCameraCtrl(segR33, enable);
-    segCameraCtrl(segR34, enable);
+    // segCameraCtrl(segR31, enable);
+    // segCameraCtrl(segR32, enable);
+    // segCameraCtrl(segR33, enable);
+    // segCameraCtrl(segR34, enable);
   }
 }
 
@@ -2036,7 +2163,7 @@ export function adjustBrightness (delta) {
     r1.stackHelper.slice.windowCenter += val;
     // bug fixed : Apply same windowCenter for every stack
     r2.stackHelper.slice.windowCenter = r1.stackHelper.slice.windowCenter;
-    r3.stackHelper.slice.windowCenter = r1.stackHelper.slice.windowCenter;
+    // r3.stackHelper.slice.windowCenter = r1.stackHelper.slice.windowCenter;
   }
 }
 
@@ -2317,11 +2444,14 @@ function initScreen(render, fileName){
 
   var mosaicTexture = null
   if (fileName !== null) {
-    mosaicTexture = THREE.ImageUtils.loadTexture( "../../../static/data/" + fileName + "/out_" + render.targetID + ".png" )
+    // mosaicTexture = THREE.ImageUtils.loadTexture( "../../../static/data/" + fileName + "/out_" + render.targetID + ".png" )
+    // mosaicTexture = THREE.ImageUtils.loadTexture( "../../../static/result/out_" + render.targetID + ".png" )
+    // mosaicTexture = new THREE.DataTexture(reversePngArray(render.texture.data), 256, 256*64, THREE.RGBAFormat );
+    mosaicTexture = new THREE.DataTexture(render.texture.data, 256, 256, THREE.RGBAFormat );
   } else {
-    // mosaicTexture = new THREE.DataTexture(render.texture.data, 256, 256*64, THREE.RGBAFormat );
+    mosaicTexture = new THREE.DataTexture(render.texture.data, 256, 256, THREE.RGBAFormat );
   }
-  // mosaicTexture.needsUpdate = true;
+  mosaicTexture.needsUpdate = true;
   mosaicTexture.magFilter = THREE.LinearFilter;
   mosaicTexture.minFilter = THREE.LinearFilter;
   //mosaicTexture.flipY = false;
@@ -2344,7 +2474,7 @@ function initScreen(render, fileName){
       // the number of slice per column
       nbSlicePerCol: {
         type: "f",
-        value: 64.0
+        value: 1.0
       },
       // the number of slice in total
       nbSliceTotal: {
@@ -2391,8 +2521,8 @@ function initScreen(render, fileName){
     x = -x;
   } else if (render.domId == r2.domId) {
     x = -x;
-  } else if (render.domId == r3.domId) {
-    x = -x;
+  // } else if (render.domId == r3.domId) {
+  //   x = -x;
   }
 
   var geometry = new THREE.PlaneBufferGeometry( x, y, 1 );

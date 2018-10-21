@@ -300,15 +300,15 @@
         } else if (uploadedFile.from === 'right') {
           // 오른쪽 파일
         }
-        return
+        // return
 
 
 //        console.log('setUploadedFile')
-        var temp = uploadedFile.name.split('.');
-        this.dicom_name = temp[0];
-        this.$store.commit(mutationType.SET_SHOW_TAGS, false)
-        this.loadingSpinner.loading = true
-        this.uploadedFile = uploadedFile
+//         var temp = uploadedFile.name.split('.');
+//         this.dicom_name = temp[0];
+//         this.$store.commit(mutationType.SET_SHOW_TAGS, false)
+//         this.loadingSpinner.loading = true
+//         this.uploadedFile = uploadedFile
         Medic3D.loadZip(uploadedFile, this.eventDispatcher)
           .then((state) => {
             // to need more time for rendering
